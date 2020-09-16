@@ -225,6 +225,53 @@ input {
   transform: translateY(-8px) rotate(-45deg);
 }
 
+// Button
+button {
+  background-color: $btn-color;
+  border: none;
+  transition: background-color 0.5s linear, color 0.5s linear;
+
+  &:hover {
+    background-color: darken($btn-color, 5%);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.float-button-menu-toggle {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  bottom: 1rem;
+  right: 1rem;
+  animation: shadowFloat 3.9s linear alternate infinite;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 13px;
+  padding: 8px 10px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 1px darken($btn-color, 10%);
+}
+
+.float-button-menu-toggle:active {
+  box-shadow: 5px #000;
+  bottom: 0.9rem;
+}
+
+// Animations
+@keyframes shadowFloat {
+  0% {
+    box-shadow: 0 20px 40px $shadow-color;
+    transform: translateY(-3px);
+  }
+  100% {
+    box-shadow: 0 10px 10px darken($shadow-color, 5%);
+    transform: translateY(3px);
+  }
+}
+
 /* KEYFRAME ANIMATIONS */
 
 @-webkit-keyframes gradbar {
@@ -315,6 +362,7 @@ input {
     font-size: 1rem;
   }
 
+  .float-button-menu-toggle,
   .menu-toggle,
   .bar {
     display: block;
@@ -351,51 +399,5 @@ input {
 
   .search-input {
     display: none;
-  }
-}
-
-// Button
-button {
-  background-color: $btn-color;
-  border: none;
-  transition: background-color 0.5s linear, color 0.5s linear;
-
-  &:hover {
-    background-color: darken($btn-color, 5%);
-  }
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.float-button-menu-toggle {
-  position: absolute;
-  z-index: 1;
-  bottom: 1rem;
-  right: 1rem;
-  animation: shadowFloat 3.9s linear alternate infinite;
-  border-radius: 50px;
-  color: #fff;
-  font-size: 13px;
-  padding: 8px 10px;
-  text-transform: uppercase;
-  text-shadow: 0 1px 1px darken($btn-color, 10%);
-}
-
-.float-button-menu-toggle:active {
-  box-shadow: 5px #000;
-  bottom: 0.9rem;
-}
-
-// Animations
-@keyframes shadowFloat {
-  0% {
-    box-shadow: 0 20px 40px $shadow-color;
-    transform: translateY(-3px);
-  }
-  100% {
-    box-shadow: 0 10px 10px darken($shadow-color, 5%);
-    transform: translateY(3px);
   }
 }
