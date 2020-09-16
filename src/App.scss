@@ -241,6 +241,7 @@ button {
 }
 
 .ham {
+  display: none;
   cursor: pointer;
   animation: shadowFloat 3.9s linear alternate infinite;
   -webkit-tap-highlight-color: transparent;
@@ -385,8 +386,7 @@ button {
     font-size: 1rem;
   }
 
-  .float-button-menu-toggle,
-  .menu-toggle,
+  .ham,
   .bar {
     display: block;
     cursor: pointer;
