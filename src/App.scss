@@ -240,24 +240,47 @@ button {
   }
 }
 
-.float-button-menu-toggle {
-  display: none;
+.ham {
+  cursor: pointer;
+  animation: shadowFloat 3.9s linear alternate infinite;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   position: absolute;
-  z-index: 1;
   bottom: 1rem;
   right: 1rem;
-  animation: shadowFloat 3.9s linear alternate infinite;
-  border-radius: 50px;
-  color: #fff;
-  font-size: 13px;
-  padding: 8px 10px;
-  text-transform: uppercase;
+  background-color: $btn-color;
+  border-radius: 50%;
+  z-index: 1;
   text-shadow: 0 1px 1px darken($btn-color, 10%);
 }
 
-.float-button-menu-toggle:active {
-  box-shadow: 5px #000;
-  bottom: 0.9rem;
+.hamRotate.active {
+  transform: rotate(45deg) !important;
+}
+
+.line {
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: #fff;
+  stroke-width: 5.5;
+  stroke-linecap: round;
+}
+
+.ham4 .top {
+  stroke-dasharray: 40 121;
+}
+.ham4 .bottom {
+  stroke-dasharray: 40 121;
+}
+.ham4.active .top {
+  stroke-dashoffset: -68px;
+}
+.ham4.active .bottom {
+  stroke-dashoffset: -68px;
 }
 
 // Animations
