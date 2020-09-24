@@ -4,6 +4,13 @@ import { ListProductsQuery } from '../API'
 import { createProduct } from '../graphql/mutations'
 import { listProducts } from '../graphql/queries'
 import { onCreateProduct } from '../graphql/subscriptions'
+import './../assets/css/shopping.scss'
+import {
+  ShoppingCartOutlined,
+  MinusCircleOutlined,
+  PlusCircleOutlined,
+} from '@ant-design/icons'
+import Badge from 'antd/lib/badge'
 
 type Product = {
   id?: string
@@ -133,14 +140,36 @@ const ProductPage = () => {
 
   return (
     <>
-      <h1>Products</h1>
-      <ul>
-        {state.products.map((product, index) => (
-          <li key={index}>
-            {product.nombre} - {product.precio}
-          </li>
-        ))}
-      </ul>
+      <div className="product-page">
+        <div className="shopping-cart">
+          <div className="products">
+            <h2>Productos</h2>
+            <ul>
+              {state.products.map((product, index) => (
+                <li key={index}>
+                  <div className="item">
+                    <h3>{product.nombre}</h3>
+                    <div className="quantity">
+                      <MinusCircleOutlined style={{ fontSize: '30px' }} />
+                      <PlusCircleOutlined style={{ fontSize: '30px' }} />
+                    </div>
+                    <span>{product.precio}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="cart">
+              <Badge count={5} className="badge" offset={[10, 0]}>
+                <ShoppingCartOutlined
+                  style={{ fontSize: '30px', color: '#fff' }}
+                />
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <h1>Products</h1>
+      
 
       <div className="container">
         <form onSubmit={createNewProduct}>
@@ -150,7 +179,7 @@ const ProductPage = () => {
           <input type="text" name="precio" onChange={handleChange} /> <br />
           <button type="submit">Crear</button>
         </form>
-      </div>
+      </div> */}
     </>
   )
 }
