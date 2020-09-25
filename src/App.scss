@@ -41,13 +41,20 @@ h2 {
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
-  background-color: #fff;
+  background-color: #456990;
 }
 
 .grad-bar {
   width: 100%;
   height: 5px;
-  background: linear-gradient(-45deg, #03045e, #023e8a, #0077b6, #00b4d8);
+  background: linear-gradient(
+    -45deg,
+    #ffe3e0,
+    #fbc3bc,
+    #f7a399,
+    #f38375,
+    #ef6351
+  );
   background-size: 400% 400%;
   -webkit-animation: gradbar 15s ease infinite;
   -moz-animation: gradbar 15s ease infinite;
@@ -93,7 +100,7 @@ h2 {
 /* APP */
 
 .App {
-  height: 100vh;
+  height: calc(100vh - 100px);
 }
 
 /* SECTIONS */
@@ -251,7 +258,7 @@ button {
   -ms-user-select: none;
   user-select: none;
   position: absolute;
-  bottom: 1rem;
+  bottom: 5rem;
   right: 1rem;
   background-color: $btn-color;
   border-radius: 50%;

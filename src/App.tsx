@@ -1,9 +1,10 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import './App.scss'
 import Header from './components/layout/Header'
 import Home from './pages/Home'
 import ProductPage from './pages/ProductPage'
+import 'antd/dist/antd.css'
+import './App.scss'
 
 function App() {
   return (

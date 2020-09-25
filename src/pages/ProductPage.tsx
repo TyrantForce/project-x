@@ -1,9 +1,16 @@
 import { API, graphqlOperation } from 'aws-amplify'
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import { ListProductsQuery } from '../API'
 import { createProduct } from '../graphql/mutations'
 import { listProducts } from '../graphql/queries'
 import { onCreateProduct } from '../graphql/subscriptions'
+import './../assets/css/shopping.scss'
+import {
+  ShoppingCartOutlined,
+  MinusCircleOutlined,
+  PlusCircleOutlined,
+} from '@ant-design/icons'
+import Badge from 'antd/lib/badge'
 
 type Product = {
   id?: string
@@ -72,6 +79,9 @@ const reducer = (state: AppState, action: Action) => {
 const ProductPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
+  const [order, setOrder] = useState<Product[]>([])
+
+
   useEffect(() => {
     fetchProducts()
 
@@ -87,6 +97,14 @@ const ProductPage = () => {
 
     return () => subscription.unsubscribe()
   }, [])
+
+  useEffect(() => {
+    console.log('inicia componente')
+  }, [])
+
+  useEffect(() => {
+    console.log('cambia estado (order)')
+  }, [order.reduce((a, b) => a + (b.cantidad || 0), 0)])
 
   const fetchProducts = async () => {
     dispatch({ type: 'SET_LOADING', payload: true })
@@ -127,20 +145,59 @@ const ProductPage = () => {
     }
   }
 
+  const addProductToCart = (product: Product) => {
+    const id = order.findIndex(o => o.id === product.id)
+    if ( id === -1 ) {
+      setOrder(order => [...order, { ...product, cantidad: 1 }])
+      //setOrder(order => order.concat(product))
+    } else {
+      const p = order.map(el => el.id === product.id ? { ...el, cantidad: el.cantidad ? el.cantidad + 1 : 1 } : el)
+      setOrder(p)
+    }
+  }
+
+  const minusProductToCart = (product: Product) => {
+    /* if ( order.findIndex(o => o.id === product.id) !== -1 ) {
+      
+    } */
+  }
+
   if (state.loading) {
     return <h1>Loading ...</h1>
   }
 
   return (
     <>
-      <h1>Products</h1>
-      <ul>
-        {state.products.map((product, index) => (
-          <li key={index}>
-            {product.nombre} - {product.precio}
-          </li>
-        ))}
-      </ul>
+      <div className="product-page">
+        <div className="shopping-cart">
+          <div className="products">
+            <h2>Productos</h2>
+            <ul>
+              {state.products.map((product, index) => (
+                <li key={index}>
+                  <div className="item">
+                    <h3>{product.nombre}</h3>
+                    <div className="quantity">
+                      <MinusCircleOutlined style={{ fontSize: '30px', cursor: 'pointer' }} />
+                      <PlusCircleOutlined style={{ fontSize: '30px', cursor: 'pointer' }} onClick={() => addProductToCart(product)} />
+                    </div>
+                    <span>{product.precio}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="cart">
+              <Badge count={order.reduce((a, b) => a + (b.cantidad || 0), 0)} className="badge" offset={[10, 0]}>
+                <ShoppingCartOutlined
+                  style={{ fontSize: '30px', color: '#fff' }}
+                />
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <h1>Products</h1>
+      
 
       <div className="container">
         <form onSubmit={createNewProduct}>
@@ -150,7 +207,7 @@ const ProductPage = () => {
           <input type="text" name="precio" onChange={handleChange} /> <br />
           <button type="submit">Crear</button>
         </form>
-      </div>
+      </div> */}
     </>
   )
 }
