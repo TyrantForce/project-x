@@ -40,10 +40,13 @@ const Header = () => {
           </div>
           <ul className={'nav no-search ' + (mobileNav ? 'mobile-nav' : '')}>
             <li className="nav-item">
-              <Link to="#">Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="#">Products</Link>
+              <Link to="/products">Products</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/categories">Categories</Link>
             </li>
 
             <i className="fas fa-search" id="search-icon"></i>

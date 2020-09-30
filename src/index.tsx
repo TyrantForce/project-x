@@ -7,12 +7,15 @@ import * as serviceWorker from './serviceWorker'
 // configuraciones de amplify
 import Amplify from 'aws-amplify'
 import awsExports from './aws-exports'
+import { AppStateProvider } from './context/AppStateContext'
 Amplify.configure(awsExports)
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <AppStateProvider>
+        <App />
+      </AppStateProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

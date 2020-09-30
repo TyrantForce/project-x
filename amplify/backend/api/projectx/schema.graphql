@@ -5,31 +5,30 @@ enum ProductStatus {
 type Category @model {
   id: ID!
   nombre: String!
-  descripcion: String,
-  products: [Product] @connection(name:"productCategories"),
+  descripcion: String
+  products: [Product] @connection(name: "productCategories")
 }
 type Product @model {
   id: ID!
   nombre: String!
-  descripcion: String,
-  cantidad: Int,
-  precio: Float,
-  status: ProductStatus,
-  category: Category @connection(name:"productCategories"),
-  Ordenes: [ProductOrden] @connection(name:"productOrden"),
+  descripcion: String
+  cantidad: Int
+  precio: Float
+  status: ProductStatus
+  category: Category @connection(name: "productCategories") #1 - M
+  ordenes: [ProductOrden] @connection(name: "productOrden") #M - M
 }
 type Orden @model {
   id: ID!
   cliente: String!
-  products: [ProductOrden] @connection(name:"ordenProduct"),
+  products: [ProductOrden] @connection(name: "ordenProduct")
 }
 
-type ProductOrden @model(queries: null)
-  {
+type ProductOrden @model(queries: null) {
   id: ID!
-  product: Product! @connection(name:"productOrden")
-  orden: Orden! @connection(name:"ordenProduct")
-  cantidad: Int,
-  precio: Float,
+  product: Product! @connection(name: "productOrden")
+  orden: Orden! @connection(name: "ordenProduct")
+  cantidad: Int
+  precio: Float
   status: ProductStatus
 }
